@@ -1,4 +1,5 @@
 from pyrogram import filters
+from asyncio import sleep
 from bot import bot
 import os
 from bs4 import BeautifulSoup
@@ -6,7 +7,17 @@ import requests
 
 screen_shot = "nana/downloads/"
 
-@bot.on_message(filters.user([792028928, 1334822377, 1232515770]) & filters.photo)
+@bot.on_message(
+    filters.user(
+        [
+            792028928,
+            1334822377,
+            1232515770,
+            1086660682
+        ]
+    ) &
+    filters.photo
+)
 async def harem_steal(client, message):
     dis_loc = ''
     if message.photo:
@@ -37,4 +48,6 @@ async def harem_steal(client, message):
         prs_anchor_element = prs_div.find("a")
         prs_text = prs_anchor_element.text
         out_str = f"/protecc {prs_text}"
-    await message.reply(out_str, parse_mode="markdown")
+    m = await message.reply(out_str, parse_mode="markdown")
+    await sleep(3)
+    await m.delete()
